@@ -37,6 +37,7 @@ This project uses Next.js, TypeScript, Tailwind CSS, and Vitest. It uses the tes
 #### UI/UX:
 
 - Very little thought or effort went into the presentation of the app. Including the layout, styling, accessibility, and responsiveness.
+- There's no way out of the createPost and updatePost Forms. Should have an "X" or "Cancel" button.
 
 #### Component structure:
 

@@ -8,14 +8,20 @@ import { getAllPosts } from "./api/placeholder";
 export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [showAllPosts, setShowAllPosts] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadPosts = async () => {
       const data = await getAllPosts();
       setPosts(data);
+      setIsLoading(false);
     };
     loadPosts();
   }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>; // Show loading state while data is being fetched
+  }
 
   return (
     <div className="flex flex-col  min-h-screen py-2">
@@ -25,34 +31,30 @@ export default function Page() {
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
         {!showAllPosts
           ? posts.slice(0, 6).map((post) => (
-              <>
-                <article
-                  key={post.id}
-                  className="p-4 border border-solid border-black/[.08] rounded">
-                  <h2 className="text-lg font-semibold">{post.title}</h2>
-                  <p className="mt-2 text-sm text-gray-600 ">{post.body}</p>
-                  <Link
-                    href={`/posts/${post.id}`}
-                    className="mt-4 text-sm text-blue-600">
-                    Read more
-                  </Link>
-                </article>
-              </>
+              <article
+                key={post.id}
+                className="p-4 border border-solid border-black/[.08] rounded">
+                <h2 className="text-lg font-semibold">{post.title}</h2>
+                <p className="mt-2 text-sm text-gray-600 ">{post.body}</p>
+                <Link
+                  href={`/posts/${post.id}`}
+                  className="mt-4 text-sm text-blue-600">
+                  Read more
+                </Link>
+              </article>
             ))
           : posts.map((post) => (
-              <>
-                <article
-                  key={post.id}
-                  className="p-4 border border-solid border-black/[.08] rounded">
-                  <h2 className="text-lg font-semibold">{post.title}</h2>
-                  <p className="mt-2 text-sm text-gray-600 ">{post.body}</p>
-                  <Link
-                    href={`/posts/${post.id}`}
-                    className="mt-4 text-sm text-blue-600">
-                    Read more
-                  </Link>
-                </article>
-              </>
+              <article
+                key={post.id}
+                className="p-4 border border-solid border-black/[.08] rounded">
+                <h2 className="text-lg font-semibold">{post.title}</h2>
+                <p className="mt-2 text-sm text-gray-600 ">{post.body}</p>
+                <Link
+                  href={`/posts/${post.id}`}
+                  className="mt-4 text-sm text-blue-600">
+                  Read more
+                </Link>
+              </article>
             ))}
       </div>
       <button

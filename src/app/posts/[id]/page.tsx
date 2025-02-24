@@ -5,7 +5,6 @@ import UpdatePost from "@/app/components/updatePost";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = (await params).id;
-
   const postId = Number(id);
   const post = await getPostById(postId);
 
