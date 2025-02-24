@@ -3,7 +3,7 @@
 import { deletePost } from "../api/placeholder";
 
 interface Props {
-  id: number;
+  id: number | string;
 }
 
 export default function RemoveButton({ id }: Props) {
