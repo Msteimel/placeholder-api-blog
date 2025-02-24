@@ -73,7 +73,9 @@ export default function CreatePost() {
     );
   } else {
     return (
-      <button onClick={() => setFormActive(true)} className="text-blue-600">
+      <button
+        onClick={() => setFormActive(true)}
+        className="p-4 text-center rounded bg-blue-600 text-black">
         Create Post
       </button>
     );
