@@ -1,33 +1,65 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import type { Post } from "./types/Post";
 import { getAllPosts } from "./api/placeholder";
 
-export default async function Page() {
-  const posts = await getAllPosts();
+export default function Page() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [showAllPosts, setShowAllPosts] = useState(false);
 
-  //TODO: set up in Git
-  // /TODO: create header with home link and "create post" page.
-  // /TODO: create a form to create new post.
-  //TODO: do validation on update and create post.
-  //TODO: create unit tests for some components. Vitest and React Testing Library;
-  //TODO add a readme.md with a high-level overview of the project and how to run it.
+  useEffect(() => {
+    const loadPosts = async () => {
+      const data = await getAllPosts();
+      setPosts(data);
+    };
+    loadPosts();
+  }, []);
 
   return (
-    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-      {posts.slice(0, 5).map((post) => (
-        <article
-          key={post.id}
-          className="p-4 border border-solid border-black/[.08] dark:border-white/[.145] rounded">
-          <h2 className="text-lg font-semibold">{post.title}</h2>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            {post.body}
-          </p>
-          <Link
-            href={`/posts/${post.id}`}
-            className="mt-4 text-sm text-blue-600 dark:text-blue-400">
-            Read more
-          </Link>
-        </article>
-      ))}
+    <div className="flex flex-col  min-h-screen py-2">
+      <h2 className="text-2xl pl-4">
+        {showAllPosts ? `All Posts` : `Most Recent Posts`}
+      </h2>
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+        {!showAllPosts
+          ? posts.slice(0, 6).map((post) => (
+              <>
+                <article
+                  key={post.id}
+                  className="p-4 border border-solid border-black/[.08] rounded">
+                  <h2 className="text-lg font-semibold">{post.title}</h2>
+                  <p className="mt-2 text-sm text-gray-600 ">{post.body}</p>
+                  <Link
+                    href={`/posts/${post.id}`}
+                    className="mt-4 text-sm text-blue-600">
+                    Read more
+                  </Link>
+                </article>
+              </>
+            ))
+          : posts.map((post) => (
+              <>
+                <article
+                  key={post.id}
+                  className="p-4 border border-solid border-black/[.08] rounded">
+                  <h2 className="text-lg font-semibold">{post.title}</h2>
+                  <p className="mt-2 text-sm text-gray-600 ">{post.body}</p>
+                  <Link
+                    href={`/posts/${post.id}`}
+                    className="mt-4 text-sm text-blue-600">
+                    Read more
+                  </Link>
+                </article>
+              </>
+            ))}
+      </div>
+      <button
+        onClick={() => setShowAllPosts(!showAllPosts)}
+        className="p-4 text-center rounded bg-blue-600 text-black max-w-[250px] self-center">
+        {showAllPosts ? "Hide more" : "Show all"} posts
+      </button>
     </div>
   );
 }
