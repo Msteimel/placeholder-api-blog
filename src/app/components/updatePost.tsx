@@ -121,7 +121,7 @@ export default function UpdatePost({ post }: Props) {
   } else {
     return (
       <button onClick={() => setFormActive(true)} className="text-blue-600">
-        Update
+        Update Post
       </button>
     );
   }

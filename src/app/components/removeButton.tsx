@@ -16,7 +16,7 @@ export default function RemoveButton({ id }: Props) {
 
   return (
     <button onClick={handleClick} className="text-red-600">
-      Remove
+      Remove Post
     </button>
   );
 }
