@@ -9,7 +9,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const postId = Number(id);
   const post = await getPostById(postId);
 
-  const comments = await getCommentsByPostId(postId);
+  const comments = await getCommentsByPostId(id);
 
   return (
     <article className="p-4 border border-solid border-black/[.08] dark:border-white/[.145] rounded">
