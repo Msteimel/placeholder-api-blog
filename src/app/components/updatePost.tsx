@@ -1,4 +1,6 @@
 "use client";
+// using the client directive because of the user ability to click button and update form
+
 import { Post } from "../types/Post";
 import { updatePost } from "../api/placeholder";
 import { useState } from "react";
@@ -40,7 +42,6 @@ export default function UpdatePost({ post }: Props) {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    // Prevent default form submission
     e.preventDefault();
 
     // Check for unchanged content

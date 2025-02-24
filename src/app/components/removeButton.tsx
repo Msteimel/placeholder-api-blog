@@ -1,4 +1,5 @@
 "use client";
+//using the client directive because of the user ability to click button
 
 import { deletePost } from "../api/placeholder";
 

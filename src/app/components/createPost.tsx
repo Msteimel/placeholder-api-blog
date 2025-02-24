@@ -4,9 +4,8 @@ import { Post } from "../types/Post";
 import { createPost } from "../api/placeholder";
 import { useState } from "react";
 
-//TODO: Add error handling and update to be more in line with updatePost.tsx
-
 export default function CreatePost() {
+  // TODO: this would be a candidate for useReducer
   const [formActive, setFormActive] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("New post");
   const [body, setBody] = useState<string>("New post body");

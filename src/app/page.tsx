@@ -1,4 +1,5 @@
 "use client";
+//using the client directive because of the user ability to show/hide posts
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -10,6 +11,7 @@ export default function Page() {
   const [showAllPosts, setShowAllPosts] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  // useEffect to fetch all posts on component mount
   useEffect(() => {
     const loadPosts = async () => {
       const data = await getAllPosts();
@@ -20,7 +22,7 @@ export default function Page() {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>; // Show loading state while data is being fetched
+    return <div>Loading...</div>;
   }
 
   return (
