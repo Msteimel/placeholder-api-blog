@@ -34,6 +34,7 @@ export async function createPost(post: Post): Promise<Post> {
         title: post.title,
         body: post.body,
         userId: post.userId,
+        id: post.id,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
